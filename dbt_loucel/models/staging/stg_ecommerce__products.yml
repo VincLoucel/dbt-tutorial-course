@@ -1,8 +1,8 @@
 version: 2
 
 models:
-  - name: stg_ecommerce__orders
-    description: stg model for ecommerce model, 1 row by model
+  - name: stg_ecommerce__products
+    description: stg model for products model, 1 row by model
     columns:
       - name: product_id
         description: primary key

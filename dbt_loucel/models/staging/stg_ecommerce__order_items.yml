@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: stg_ecommerce__order_items
+    description: The staging model for order item
+    columns:
+      - name: order_item_id
+        description: the primary key
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: ""
+
+      - name: user_id
+        description: ""
+
+      - name: product_id
+        description: ""
+
+      - name: inventory_item_id
+        description: ""
+
+      - name: status
+        description: ""
+
+      - name: created_at
+        description: ""
+
+      - name: shipped_at
+        description: date where shipped
+        tests:
+          - not_null:
+              where: delivered_at IS NOT NULL OR status = 'Shipped'
+
+      - name: delivered_at
+        description: ""
+
+      - name: returned_at
+        description: date of retrun
+        tests:
+          - not_null:
+              where: status = 'Returned'
+
+      - name: sale_price
+        description: ""
