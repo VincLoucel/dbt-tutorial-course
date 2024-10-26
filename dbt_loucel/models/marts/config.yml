@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: dim_orders
+    description: first dim of the tuto énorme
+    columns:
+      - name: order_id
+        description: tjrs la meme, la primary key
+        tests:
+          - not_null
+          - unique 
+          - relationships:
+              to: ref('stg_ecommerce__orders')
+              field: order_id
+            
+
+      - name: order_created_at
+        description: blabla
+
+      - name: order_shipped_at
+        description: bloubli
+
+      - name: order_delivered_at
+        description: bleble
+
+      - name: order_returned_at
+        description: bleubleu
+
+      - name: order_status
+        description: ""
+
+      - name: num_items_ordered
+        description: ""
+
+      - name: total_sale_price
+        description: ""
+
+      - name: total_product_cost
+        description: ""
+
+      - name: total_profit
+        description: ""
+
+      - name: total_discount
+        description: ""

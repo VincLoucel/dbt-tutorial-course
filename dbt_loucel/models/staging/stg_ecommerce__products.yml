@@ -27,6 +27,13 @@ models:
 
       - name: department
         description: ""
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+              - "Men"
+              quote: true
+
 
       - name: sku
         description: ""
