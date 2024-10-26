@@ -17,7 +17,7 @@ models:
           - relationships:
               to: ref('stg_ecommerce__orders')
               field: order_id
-‡
+
       - name: user_id
         description: ""
 
