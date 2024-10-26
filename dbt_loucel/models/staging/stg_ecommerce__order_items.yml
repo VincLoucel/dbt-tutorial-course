@@ -11,14 +11,23 @@ models:
           - unique
 
       - name: order_id
-        description: ""
-
+        description: the id of the order
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ecommerce__orders')
+              field: order_id
+‡
       - name: user_id
         description: ""
 
       - name: product_id
         description: ""
-
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_ecommerce__products')
+              field: product_id
       - name: inventory_item_id
         description: ""
 
