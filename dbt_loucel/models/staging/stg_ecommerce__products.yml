@@ -9,10 +9,15 @@ models:
         tests:
           - not_null
           - unique
+          - primary_key:
+              severity: error
+              where: "department = 'Men'"
 
       - name: cost
         description: ""
-
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
       - name: category
         description: ""
 
@@ -24,6 +29,12 @@ models:
 
       - name: retail_price
         description: ""
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+          - dbt_utils.expression_is_true:
+              expression: ">= cost"
 
       - name: department
         description: ""
@@ -31,8 +42,12 @@ models:
           - not_null
           - accepted_values:
               values:
-              - "Men"
+                - "Men"
+                - "Women"
               quote: true
+              severity: error
+              #warn_if: ">0"
+              #error_if: ">2"
 
 
       - name: sku

@@ -34,8 +34,14 @@ models:
   dbt_loucel:
     staging:
       +materialized: table
+      +persist_docs:
+        relation: true
+        columns: true
     intermediate:
       +materialized: table
+      +persist_docs:
+        relation: true
+        columns: true
     marts:
       +materialized: table
       +persist_docs:
