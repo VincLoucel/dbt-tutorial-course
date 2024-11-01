@@ -7,7 +7,13 @@ order_item_measures AS (
 		SUM(item_sale_price) AS total_sale_price,
 		SUM(product_cost) AS total_product_cost,
 		SUM(item_profit) AS total_profit,
-		SUM(item_discount) AS total_discount
+		SUM(item_discount) AS total_discount,
+
+		
+		{% for departement in dbt_utils.get_column_values(table=ref('int_ecommerce__order_items_products'), column='product_department')%}
+		SUM(IF(product_department = '{{ departement }}', item_sale_price, 0 )) AS total_sold_{{departement}}swear{{ "," if not loop.last }}
+		{%- endfor -%}
+
 	FROM {{ ref('int_ecommerce__order_items_products') }}
 	GROUP BY 1
 )
@@ -29,6 +35,9 @@ SELECT
 	om.total_product_cost,
 	om.total_profit,
 	om.total_discount,
+	{% for departement in departements%}
+	total_sold_{{ departement.lower() }}swear{{ "," if not loop.last }}
+	{% endfor %}
 
 	TIMESTAMP_DIFF(od.created_at, user_data.first_order_created_at, DAY) AS diff_days
 FROM {{ ref('stg_ecommerce__orders') }} AS od
