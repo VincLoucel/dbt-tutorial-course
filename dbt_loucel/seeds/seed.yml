@@ -11,8 +11,10 @@ seeds:
     columns:
       - name: id
         tests:
-          - not_null
-          - unique
+          - not_null:
+              severity: error
+          - unique:
+              severity: error
       - name: name
         description: "Distribution center name"
       - name: latitude
